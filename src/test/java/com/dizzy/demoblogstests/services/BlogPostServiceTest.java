@@ -29,6 +29,6 @@ class BlogPostServiceTest {
         // when
         List<BlogPost> allPosts = blogPostService.findAllByBlog(1L);
         // then
-        assertNotNull(allPosts);
+        assertTrue(allPosts.isEmpty());
     }
 }

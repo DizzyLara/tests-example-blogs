@@ -7,6 +7,7 @@ import com.dizzy.demoblogstests.repositories.BlogPostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,7 @@ public class BlogPostService {
             Blog blog = blogService.findById(blogId);
             return blogPostRepository.findAllByBlog(blog);
         } catch (EntityNotFoundException ex) {
-            return null;
+            return new ArrayList<>();
         }
     }
 
