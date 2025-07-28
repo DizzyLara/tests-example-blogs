@@ -48,7 +48,7 @@ jobs:
         if: always()
         with:
           name: Unit Test Results
-          path: build/test-results/test/**/*.xml  # Recursive glob
+          path: build/test-results/test/*.xml  # Recursive glob
           reporter: java-junit
           fail-on-error: false  # Continue job even if reporting fails
         env:
