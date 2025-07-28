@@ -43,3 +43,13 @@ jobs:
           path: |
             build/test-results/test/**
             build/reports/tests/test/**
+      - name: Publish Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Unit Test Results
+          path: build/test-results/test/*.xml  # Recursive glob
+          reporter: java-junit
+          fail-on-error: false  # Continue job even if reporting fails
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

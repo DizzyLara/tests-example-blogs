@@ -4,8 +4,10 @@ package com.dizzy.demoblogstests.services;
 import com.dizzy.demoblogstests.entities.Blog;
 import com.dizzy.demoblogstests.entities.BlogPost;
 import com.dizzy.demoblogstests.repositories.BlogPostRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,11 +22,12 @@ public class BlogPostService {
     }
 
     public List<BlogPost> findAllByBlog(Long blogId) {
-        Blog blog = blogService.findById(blogId);
-        if  (blog == null) {
-            return null;
+        try {
+            Blog blog = blogService.findById(blogId);
+            return blogPostRepository.findAllByBlog(blog);
+        } catch (EntityNotFoundException ex) {
+            return new ArrayList<>();
         }
-        return blogPostRepository.findAllByBlog(blog);
     }
 
     public BlogPost save(BlogPost blogPost, Long blogId) {
